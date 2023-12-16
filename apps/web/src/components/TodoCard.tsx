@@ -7,7 +7,7 @@ export default function TodoCard({ todo }: { todo: Todo }) {
   return (
     <div
       key={todo.id}
-      className="bg-card text-card-foreground rounded-lg border shadow-sm min-w-[300px] max-w-xl"
+      className="bg-card text-card-foreground min-w-[300px] max-w-xl rounded-lg border shadow-sm"
     >
       <div className="flex flex-row items-start gap-2 p-4">
         <CheckboxPrimitive.Root className="border-primary h-4 w-4 shrink-0 rounded-sm border">
@@ -15,10 +15,10 @@ export default function TodoCard({ todo }: { todo: Todo }) {
             <Check className="h-4 w-4" />
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
-        <div className="flex-grow space-y-1 leading-none text-left">
+        <div className="flex-grow space-y-1 text-left leading-none">
           <p className="mb-2 text-base leading-none">{todo.title}</p>
           <p className="text-gray-500">{todo.description}</p>
-          <p className="text-sm text-gray-500 flex flex-row items-center gap-1 w-[200px]">
+          <p className="flex w-[200px] flex-row items-center gap-1 text-sm text-gray-500">
             <CalendarIcon size={12} />
             {formatDate(new Date(todo.dueDate))}
           </p>

@@ -27,6 +27,22 @@ const todos: Todo[] = [
     ordinal: 0,
     status: 'pending',
   },
+  {
+    id: 1,
+    title: 'Init Todo',
+    description: 'This is a todo',
+    dueDate: '2023-12-16T00:00:00.000Z',
+    ordinal: 0,
+    status: 'pending',
+  },
+  {
+    id: 2,
+    title: 'Init Todo',
+    description: 'This is a todo',
+    dueDate: '2023-12-16T00:00:00.000Z',
+    ordinal: 0,
+    status: 'pending',
+  },
 ];
 
 app.get('/todos', (req: Request, res: Response): Response => {
