@@ -62,7 +62,7 @@ export default function TodoCard({ todo }: { todo: Todo }) {
   return (
     <div
       key={todo.id}
-      className="bg-card text-card-foreground min-w-[300px] max-w-xl rounded-lg border shadow-sm"
+      className="bg-card text-card-foreground min-w-[300px] max-w-xl overflow-hidden rounded-lg border shadow-sm"
     >
       <div className="flex flex-row items-start gap-2 p-4">
         <CheckboxPrimitive.Root
@@ -86,19 +86,19 @@ export default function TodoCard({ todo }: { todo: Todo }) {
             <Check className="h-4 w-4" />
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
-        <div className="flex-grow space-y-1 text-left leading-none">
+        <div className="max-w-[300px] flex-grow space-y-1 text-left leading-none">
           <p
             className={cn(
-              'mb-2 text-base leading-none',
+              'mb-2 break-all text-base leading-none',
               todo.status === 'completed' && 'text-muted-foreground line-through',
             )}
           >
             {todo.title}
           </p>
-          <p className="text-gray-500">{todo.description}</p>
+          <p className="max-w-[300px] break-all text-gray-500">{todo.description}</p>
           <p
             className={cn(
-              'flex w-[200px] flex-row items-center justify-start gap-1 text-left text-sm font-normal text-gray-500',
+              'flex w-[200px] flex-row items-center justify-start gap-1 text-left  text-sm font-normal text-gray-500',
               todo.dueDate &&
                 isBefore(new Date(todo.dueDate), startOfDay(new Date())) &&
                 'text-destructive',
@@ -203,7 +203,11 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                                           }
                                         >
                                           <SelectPrimitive.Trigger className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 [&>span]:line-clamp-1">
-                                            <SelectPrimitive.Value placeholder={getPreselectedValue(new Date(todo.dueDate))} />
+                                            <SelectPrimitive.Value
+                                              placeholder={getPreselectedValue(
+                                                new Date(todo.dueDate),
+                                              )}
+                                            />
                                             <SelectPrimitive.Icon asChild>
                                               <ChevronDown className="h-4 w-4 opacity-50" />
                                             </SelectPrimitive.Icon>

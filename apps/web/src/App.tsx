@@ -39,7 +39,7 @@ function App() {
           </div>
         ) : (
           <TabsPrimitive.Root value={activeTab} className="min-w-[335px] space-y-2">
-            <TabsPrimitive.List className="flex flex-col space-y-2 overflow-scroll rounded-lg p-4">
+            <TabsPrimitive.List className="flex flex-col space-y-2 overflow-hidden rounded-lg p-4">
               <div className="text-muted-foreground inline-flex h-10 items-center justify-center space-x-2 rounded-md p-1">
                 <TabsPrimitive.Trigger
                   value="active"
@@ -56,10 +56,10 @@ function App() {
                   Completed
                 </TabsPrimitive.Trigger>
               </div>
-              <div className="flex max-h-[600px] flex-col space-y-2 overflow-scroll rounded-lg p-4 border">
+              <div className="flex flex-col space-y-2 rounded-lg border p-4">
                 <TabsPrimitive.Content
                   value="active"
-                  className="ring-offset-background focus-visible:ring-ring mt-2 space-y-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-y-scroll rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 >
                   {activeTodos.length === 0 ? (
                     <div>No active tasks right now, but look at those completed to-dos!</div>
