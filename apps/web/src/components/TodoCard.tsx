@@ -18,7 +18,10 @@ export default function TodoCard({ todo }: { todo: Todo }) {
       className="bg-card text-card-foreground min-w-[300px] max-w-xl rounded-lg border shadow-sm"
     >
       <div className="flex flex-row items-start gap-2 p-4">
-        <CheckboxPrimitive.Root className="border-primary ring-offset-background focus-visible:ring-ring data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground h-4 w-4 rounded-sm border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+        <CheckboxPrimitive.Root
+          checked={todo.status === 'completed'}
+          className="border-primary ring-offset-background focus-visible:ring-ring data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground h-4 w-4 rounded-sm border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        >
           <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
             <Check className="h-4 w-4" />
           </CheckboxPrimitive.Indicator>
