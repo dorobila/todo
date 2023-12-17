@@ -59,7 +59,7 @@ function App() {
               <div className="flex flex-col space-y-2 rounded-lg border p-4">
                 <TabsPrimitive.Content
                   value="active"
-                  className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-y-scroll rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-auto rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 >
                   {activeTodos.length === 0 ? (
                     <div>No active tasks right now, but look at those completed to-dos!</div>
@@ -73,7 +73,7 @@ function App() {
                     </>
                   )}
                 </TabsPrimitive.Content>
-                <TabsPrimitive.Content value="completed" className="space-y-2">
+                <TabsPrimitive.Content value="completed" className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-auto rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
                   {completedTodos.length === 0 ? (
                     <div>Get back to work!</div>
                   ) : (
@@ -90,31 +90,6 @@ function App() {
             </TabsPrimitive.List>
           </TabsPrimitive.Root>
         )}
-
-        {/* <div className="flex max-h-[600px] flex-col space-y-2 overflow-scroll rounded-lg border p-4">
-          {data?.map((todo) => (
-            <div key={todo.id}>
-              <TodoCard todo={todo} />
-            </div>
-          ))}
-        </div>
-        <div className="text-muted-foreground inline-flex h-10 items-center justify-center space-x-1 rounded-md p-1">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium"
-          >
-            Active
-          </button>
-          <button
-            type="button"
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium shadow-sm"
-          >
-            Completed
-          </button>
-        </div> */}
-        {/* <p>Seems quiet in here. How about adding a to-do?</p> */}
-        {/* <p>Get back to work!</p>
-      <p>No active tasks right now, but look at those completed to-dos!</p> */}
       </div>
     </div>
   );
