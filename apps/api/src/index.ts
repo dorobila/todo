@@ -18,55 +18,40 @@ type Todo = {
   status: 'pending' | 'completed';
 };
 
-const todos: Todo[] = [
-  {
-    id: 0,
-    title: 'Init Todo',
-    description: 'This is a todo',
-    dueDate: new Date('2023-12-16T00:00:00.000Z'),
-    ordinal: 0,
-    status: 'pending',
-  },
-  {
-    id: 1,
-    title: 'Init Todo',
-    description: 'This is a todo',
-    dueDate: new Date('2023-12-17T00:00:00.000Z'),
-    ordinal: 0,
-    status: 'pending',
-  },
-  {
-    id: 2,
-    title: 'Init Todo',
-    description: 'This is a todo',
-    dueDate: new Date('2023-12-14T00:00:00.000Z'),
-    ordinal: 0,
-    status: 'completed',
-  },
-];
+let todos: Todo[] = [];
 
 app.get('/todos', (req: Request, res: Response): Response => {
   return res.json(todos);
 });
 
+app.get('/todos/:id', (req: Request, res: Response): Response => {
+  const id = parseInt(req.params.id, 10);
+  const todo = todos[id];
+
+  return res.json(todo);
+});
+
 app.post('/todos', (req: Request, res: Response): Response => {
   const todo = req.body as Todo;
   todo.id = todos.length;
-  console.log('todo', todo);
   todos.push(todo);
+
   return res.json(todo);
 });
 
 app.put('/todos/:id', (req: Request, res: Response): Response => {
   const id = parseInt(req.params.id, 10);
   const todo = req.body as Todo;
-  todos[id] = todo;
-  return res.json(todo);
+  todos[id] = { ...todos[id], ...todo };
+
+  return res.json(todos[id]);
 });
 
 app.delete('/todos/:id', (req: Request, res: Response): Response => {
   const id = parseInt(req.params.id, 10);
-  todos.splice(id, 1);
+  const updatedTodos = todos.filter((todo) => todo.id !== id);
+  todos = updatedTodos;
+
   return res.json({ id });
 });
 

@@ -33,8 +33,10 @@ export default function NewTodoDialog() {
       ordinal: 0,
       status: 'pending',
     };
-    addTodo(valuesToSubmit).then(() => setOpen(false));
-    form.reset();
+    addTodo(valuesToSubmit).then(() => {
+      setOpen(false);
+      form.reset();
+    });
   };
 
   return (
