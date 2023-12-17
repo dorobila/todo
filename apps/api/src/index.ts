@@ -13,7 +13,7 @@ type Todo = {
   id: number;
   title: string;
   description: string;
-  dueDate: string;
+  dueDate: Date;
   ordinal: number;
   status: 'pending' | 'completed';
 };
@@ -23,7 +23,7 @@ const todos: Todo[] = [
     id: 0,
     title: 'Init Todo',
     description: 'This is a todo',
-    dueDate: '2023-12-16T00:00:00.000Z',
+    dueDate: new Date('2023-12-16T00:00:00.000Z'),
     ordinal: 0,
     status: 'pending',
   },
@@ -31,7 +31,7 @@ const todos: Todo[] = [
     id: 1,
     title: 'Init Todo',
     description: 'This is a todo',
-    dueDate: '2023-12-16T00:00:00.000Z',
+    dueDate: new Date('2023-12-17T00:00:00.000Z'),
     ordinal: 0,
     status: 'pending',
   },
@@ -39,9 +39,9 @@ const todos: Todo[] = [
     id: 2,
     title: 'Init Todo',
     description: 'This is a todo',
-    dueDate: '2023-12-16T00:00:00.000Z',
+    dueDate: new Date('2023-12-14T00:00:00.000Z'),
     ordinal: 0,
-    status: 'pending',
+    status: 'completed',
   },
 ];
 
@@ -51,7 +51,8 @@ app.get('/todos', (req: Request, res: Response): Response => {
 
 app.post('/todos', (req: Request, res: Response): Response => {
   const todo = req.body as Todo;
-  todo.id = todos.length - 1;
+  todo.id = todos.length;
+  console.log('todo', todo);
   todos.push(todo);
   return res.json(todo);
 });

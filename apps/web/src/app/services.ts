@@ -4,7 +4,7 @@ export type Todo = {
   id: number;
   title: string;
   description: string;
-  dueDate: string;
+  dueDate: Date;
   ordinal: number;
   status: 'completed' | 'pending';
 };
@@ -17,8 +17,23 @@ export const todoApi = createApi({
   endpoints: (build) => ({
     getTodos: build.query<PostsResponse, void>({
       query: () => 'todos',
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Todo' as const, id })),
+              { type: 'Todo', id: 'LIST' },
+            ]
+          : [{ type: 'Todo', id: 'LIST' }],
+    }),
+    addTodo: build.mutation<Todo, Partial<Todo>>({
+      query: (body) => ({
+        url: `todos`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
     }),
   }),
 });
 
-export const { useGetTodosQuery } = todoApi;
+export const { useGetTodosQuery, useAddTodoMutation } = todoApi;

@@ -2,19 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@layer base {
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --background: #ffffff;
+    --foreground: #030712;
+    --card: #ffffff;
+    --card-foreground: #030712;
+    --popover: #ffffff;
+    --popover-foreground: #030712;
+    --primary: #7e35a6;
+    --primary-foreground: #f9fafb;
+    --secondary: 	#f3f4f6;
+    --secondary-foreground: #111827;
+    --muted: 	#f3f4f6;
+    --muted-foreground: 	#6b7280;
+    --accent: 	#f3f4f6;
+    --accent-foreground: #111827;
+    --destructive: #ef4444;
+    --destructive-foreground: #f9fafb;
+    --border: 	#e5e7eb;
+    --input: 	#e5e7eb;
+    --ring: #7e35a6;
+    --radius: 0.5rem;
+  }
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+  }
 }
