@@ -32,9 +32,12 @@ export const updateTodo = async (req: Request, res: Response): Promise<Response>
   const updatedTodo = await Todo.update(todo, {
     where: { id },
     returning: true,
+    logging: console.log,
   });
 
-  return res.json(updatedTodo[1][0]);
+  // fix this. Right now updatedTodo is an undefined.
+  // https://sequelize.org/docs/v7/querying/update/
+  return res.json(updatedTodo);
 };
 
 export const deleteTodo = async (req: Request, res: Response): Promise<Response> => {

@@ -11,7 +11,10 @@ const Todo = sequelize.define('Todo', {
   description: DataTypes.STRING,
   dueDate: DataTypes.DATE,
   ordinal: DataTypes.INTEGER,
-  status: DataTypes.ENUM('pending', 'completed'),
+  status: {
+    type: DataTypes.ENUM('pending', 'completed'),
+    defaultValue: 'pending',
+  },
 });
 
 export default Todo;
