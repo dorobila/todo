@@ -24,12 +24,13 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 - [x]  A user must be able to incomplete a todo
 
 
-### What needs to be done
+### Roadmap
 
 - [ ] Add drag and drop functionality
-- [ ] Move the `api` in memory database to a `sqlite3` database (sequilize??)
+- [x] Move the `api` in memory database to a `sqlite3` database (sequelize??)
 - [ ] Fix caching so that it won't refetch the whole list on crud operations
 - [ ] Instead of having a dropdown menu for edit/delete, maybe have each field editable? And just add a delete button
+- [ ] Add basic tests with supertest for the api endpoints
 
 #### Api Notes
 - frameworks like Nestjs makes prototyping with solid project structure very easy. Never take that for granted anymore :D
