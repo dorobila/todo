@@ -11,7 +11,7 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 ### Total time spent on this project
 
 - as of 17/12/2023 15:30 -> 5-6 hours
-- as of 18/12/2023 08:00 -> 6-7 hours
+- as of 18/12/2023 08:00 -> ~8 hours
 
 ### What I have done so far
 
@@ -31,17 +31,20 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 - [ ] Fix caching so that it won't refetch the whole list on crud operations
 - [ ] Instead of having a dropdown menu for edit/delete, maybe have each field editable? And just add a delete button
 - [x] Add basic tests with supertest for the api endpoints
+- [ ] Add better loading ui for the web, not just plain text
 
 #### Api Notes
 
-- frameworks like Nestjs makes prototyping with a solid project structure very easy. Never tak that for granted ever again :D
+- frameworks like Nestjs makes prototyping with a solid project structure very easy. Never take that for granted ever again :D
 
 #### Web Notes
 
 - react-hook-form & zod for forms is a mach in heaven combo
 - class-variance-authority seems like a good package for creating variants (will I use it again? not sure yet :D)
-- radix-ui primitives very good for out of the box accessability, but for the sake of readability, you NEED to [compose](https://www.radix-ui.com/primitives/docs/guides/composition#composing-with-your-own-react-components) your own components with it. See Button or Form components (maybe even add this as a task for the rest of the components)
+- radix-ui primitives very good for out of the box accessability, but for the sake of readability, you NEED to [compose](https://www.radix-ui.com/primitives/docs/guides/composition#composing-with-your-own-react-components) your own components. See Button or Form components (maybe even add this as a task for the rest of the components)
 - fix "A non-serializable value was detected in the state" - hint: it's always the date
 
 #### General Notes
 
+- time spent on fiddling with the repo structure &infin;
+- time spent reading docs ~50%
