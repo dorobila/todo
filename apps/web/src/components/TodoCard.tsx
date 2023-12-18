@@ -6,7 +6,14 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { CalendarIcon, Check, ChevronDown, MoreVerticalIcon } from 'lucide-react';
+import {
+  CalendarIcon,
+  Check,
+  ChevronDown,
+  MoreVerticalIcon,
+  PencilIcon,
+  TrashIcon,
+} from 'lucide-react';
 import {
   Todo,
   useCompleteTodoMutation,
@@ -119,6 +126,7 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                     onSelect={(e) => e.preventDefault()}
                     className="focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors"
                   >
+                    <PencilIcon className="mr-2 h-4 w-4" />
                     Edit
                   </DropdownMenuPrimitive.Item>
                 </DialogPrimitive.Trigger>
@@ -300,8 +308,12 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                   </DialogPrimitive.Content>
                 </DialogPrimitive.Portal>
               </DialogPrimitive.Root>
-              <DropdownMenuPrimitive.Item className="focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors">
+              <DropdownMenuPrimitive.Item
+                className="focus:bg-accent text-destructive relative flex w-full cursor-default select-none flex-row items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors"
+                asChild
+              >
                 <button type="button" onClick={handleDelete}>
+                  <TrashIcon className="mr-2 h-4 w-4" />
                   Delete
                 </button>
               </DropdownMenuPrimitive.Item>
