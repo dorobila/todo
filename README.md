@@ -11,6 +11,7 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 ### Total time spent on this project
 
 - as of 17/12/2023 15:30 -> 5-6 hours
+- as of 18/12/2023 08:00 -> 6-7 hours
 
 ### What I have done so far
 
@@ -29,11 +30,11 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 - [x] Move the `api` in memory database to a `sqlite3` database (sequelize??)
 - [ ] Fix caching so that it won't refetch the whole list on crud operations
 - [ ] Instead of having a dropdown menu for edit/delete, maybe have each field editable? And just add a delete button
-- [ ] Add basic tests with supertest for the api endpoints
+- [x] Add basic tests with supertest for the api endpoints
 
 #### Api Notes
 
-- frameworks like Nestjs makes prototyping with solid project structure very easy. Never take that for granted anymore :D
+- frameworks like Nestjs makes prototyping with a solid project structure very easy. Never tak that for granted ever again :D
 
 #### Web Notes
 
@@ -43,3 +44,4 @@ This project was initialized with `npx create-turbo@latest`. This project utilis
 - fix "A non-serializable value was detected in the state" - hint: it's always the date
 
 #### General Notes
+
