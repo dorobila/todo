@@ -1,12 +1,15 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { useGetTodosQuery } from './app/services';
+import { todoApi, useGetTodosQuery } from './app/services';
 import { useState } from 'react';
 import TodoCard from './components/TodoCard';
 import NewTodoDialog from './components/NewTodoDialog';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+import { useAppDispatch } from './app/hooks';
 
 function App() {
   const [activeTab, setActiveTab] = useState('active');
   const { data, error, isLoading } = useGetTodosQuery();
+  const dispatch = useAppDispatch();
 
   if (isLoading) {
     return (
@@ -27,6 +30,32 @@ function App() {
   const activeTodos = data?.filter((todo) => todo.status === 'pending') || [];
   const completedTodos = data?.filter((todo) => todo.status === 'completed') || [];
   const totalTodos = activeTodos.length + completedTodos.length;
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const { source, destination } = result;
+
+    if (source.index !== destination.index) {
+      dispatch(
+        todoApi.util.updateQueryData('getTodos', undefined, (draft) => {
+          const [removed] = draft.splice(source.index, 1);
+          draft.splice(destination.index, 0, removed);
+        }),
+      );
+
+      if (!data) return;
+
+      const todosToUpdate = [
+        { id: String(data[source.index].id), ordinal: destination.index },
+        { id: String(data[destination.index].id), ordinal: source.index },
+      ];
+
+      dispatch(todoApi.endpoints.updateTodosOrdinal.initiate({ todos: todosToUpdate }));
+    }
+  };
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center space-y-2 px-4 py-12">
@@ -65,15 +94,39 @@ function App() {
                     <div>No active tasks right now, but look at those completed to-dos!</div>
                   ) : (
                     <>
-                      {activeTodos?.map((todo) => (
-                        <div key={todo.id}>
-                          <TodoCard todo={todo} />
-                        </div>
-                      ))}
+                      <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="activeTodos">
+                          {(provided) => (
+                            <div ref={provided.innerRef} {...provided.droppableProps}>
+                              {activeTodos.map((todo, index) => (
+                                <Draggable
+                                  key={todo.id}
+                                  draggableId={todo.id.toString()}
+                                  index={index}
+                                >
+                                  {(provided) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                    >
+                                      <TodoCard todo={todo} />
+                                    </div>
+                                  )}
+                                </Draggable>
+                              ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </DragDropContext>
                     </>
                   )}
                 </TabsPrimitive.Content>
-                <TabsPrimitive.Content value="completed" className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-auto rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                <TabsPrimitive.Content
+                  value="completed"
+                  className="ring-offset-background focus-visible:ring-ring max-h-[600px] space-y-2 overflow-auto rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                >
                   {completedTodos.length === 0 ? (
                     <div>Get back to work!</div>
                   ) : (

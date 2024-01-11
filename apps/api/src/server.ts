@@ -14,5 +14,6 @@ app.get('/todos/:id', todoController.getTodo);
 app.post('/todos', todoController.createTodo);
 app.put('/todos/:id', todoController.updateTodo);
 app.delete('/todos/:id', todoController.deleteTodo);
+app.patch('/todos/update-ordinal', todoController.updateTodosOrdinal);
 
 export default app;

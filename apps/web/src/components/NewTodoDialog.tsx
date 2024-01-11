@@ -12,10 +12,12 @@ import { cn } from '../lib/utils';
 import { addDays, format, isBefore, startOfDay } from 'date-fns';
 import { Button } from './ui/Button';
 import { useState } from 'react';
-import { Todo, useAddTodoMutation } from '../app/services';
+import { Todo, useAddTodoMutation, useGetTodosQuery } from '../app/services';
 
 export default function NewTodoDialog() {
   const [addTodo, { isLoading }] = useAddTodoMutation();
+  const { data: todos = [] } = useGetTodosQuery();
+  const activeTodos = todos.filter(todo => todo.status === 'pending');
 
   const [open, setOpen] = useState(false);
   const form = useForm({
@@ -30,7 +32,7 @@ export default function NewTodoDialog() {
   const onSubmit = (values: z.infer<typeof todoSchema>) => {
     const valuesToSubmit: Pick<Todo, 'title' | 'description' | 'dueDate' | 'ordinal' | 'status'> = {
       ...values,
-      ordinal: 0,
+      ordinal: activeTodos.length,
       status: 'pending',
     };
     addTodo(valuesToSubmit).then(() => {

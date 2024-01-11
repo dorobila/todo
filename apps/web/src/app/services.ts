@@ -19,6 +19,9 @@ export const todoApi = createApi({
   endpoints: (build) => ({
     getTodos: build.query<TodosResponse, void>({
       query: () => 'todos',
+      transformResponse: (response: TodosResponse) => {
+        return response.sort((a, b) => a.ordinal - b.ordinal);
+      },
       providesTags: (result) => {
         return result
           ? [
@@ -31,6 +34,13 @@ export const todoApi = createApi({
     getTodo: build.query<Todo, number>({
       query: (id) => `todos/${id}`,
       providesTags: (result, error, id) => [{ type: 'Todo', id }],
+    }),
+    updateTodosOrdinal: build.mutation<void, { todos: { id: string; ordinal: number }[] }>({
+      query: ({ todos }) => ({
+        url: `todos/update-ordinal`,
+        method: 'PATCH',
+        body: { todos },
+      }),
     }),
     addTodo: build.mutation<Todo, Partial<Todo>>({
       query: (body) => ({

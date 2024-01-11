@@ -48,3 +48,18 @@ export const deleteTodo = async (req: Request, res: Response): Promise<Response>
 
   return res.json({ id });
 };
+
+export const updateTodosOrdinal = async (req: Request, res: Response): Promise<Response> => {
+  const todos: Todo[] = req.body.todos;
+
+  try {
+    await Promise.all(
+      todos.map((todo) => Todo.update({ ordinal: todo.ordinal }, { where: { id: todo.id } })),
+    );
+
+    const allTodos = await Todo.findAll();
+    return res.json(allTodos);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
