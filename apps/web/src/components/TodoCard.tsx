@@ -33,6 +33,7 @@ export default function TodoCard({ todo }: { todo: Todo }) {
   const [deleteTodo, { isLoading: isDeliting }] = useDeleteTodoMutation();
   const [completeTodo] = useCompleteTodoMutation();
 
+  const [isCalendarPopoverOpen, setIsCalendarPopoverOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
   const dueDate = new Date(todo.dueDate);
@@ -183,7 +184,10 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                               <FormItem>
                                 <FormLabel>Due date</FormLabel>
                                 <FormControl>
-                                  <PopoverPrimitive.Root>
+                                  <PopoverPrimitive.Root
+                                    open={isCalendarPopoverOpen}
+                                    onOpenChange={setIsCalendarPopoverOpen}
+                                  >
                                     <PopoverPrimitive.Trigger asChild>
                                       <Button
                                         variant={'outline'}
@@ -286,6 +290,9 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                                           <Calendar
                                             mode="single"
                                             selected={field.value}
+                                            onSelect={() => {
+                                              setIsCalendarPopoverOpen(false);
+                                            }}
                                             onDayClick={field.onChange}
                                           />
                                         </div>

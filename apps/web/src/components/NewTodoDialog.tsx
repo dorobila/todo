@@ -16,8 +16,10 @@ import { Todo, useAddTodoMutation } from '../app/services';
 
 export default function NewTodoDialog() {
   const [addTodo, { isLoading }] = useAddTodoMutation();
-
+  
+  const [isCalendarPopoverOpen, setIsCalendarPopoverOpen] = useState(false);
   const [open, setOpen] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(todoSchema),
     defaultValues: {
@@ -103,7 +105,10 @@ export default function NewTodoDialog() {
                     <FormItem>
                       <FormLabel>Due date</FormLabel>
                       <FormControl>
-                        <PopoverPrimitive.Root>
+                        <PopoverPrimitive.Root
+                          open={isCalendarPopoverOpen}
+                          onOpenChange={setIsCalendarPopoverOpen}
+                        >
                           <PopoverPrimitive.Trigger asChild>
                             <Button
                               variant={'outline'}
@@ -196,6 +201,9 @@ export default function NewTodoDialog() {
                                 <Calendar
                                   mode="single"
                                   selected={field.value}
+                                  onSelect={() => {
+                                    setIsCalendarPopoverOpen(false);
+                                  }}
                                   onDayClick={field.onChange}
                                 />
                               </div>
